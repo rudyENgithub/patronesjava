@@ -26,7 +26,7 @@ public class RegexMatches {
    }*/
 	
 	 public static void main(String[] args) {
-		 	String manifest = "1 2017";
+		 	String manifest = "!!lllqqqq";
 		    String text = "This is a testWithSome!DataInBetween_test.";
 		    Pattern p = Pattern.compile("test([_A-Za-z0-9 !]*)test");
 		    Pattern pman = Pattern.compile("^([0-9]*)$");
