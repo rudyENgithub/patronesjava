@@ -1,5 +1,7 @@
 package com.rudysorto.patrones;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 
 /**
@@ -25,7 +27,42 @@ public class App
         }else {
         	System.out.println("El formato de la DM es incorrecto, el formato es el siguiente AÑO.ADUANA.SERIAL.NoDM");
         }
-        
+        //"jdbc:sqlserver://172.31.240.90:1433"
+        //jdbc:sqlserver://[serverName[\instanceName][:portNumber]][;property=value[;property=value]]
+      String url =  "jdbc:odbc:Driver={SQL Server};Server=172.31.240.90;database=testdb;Uid=usaid;Pwd=usaid;charset=utf-8";
+      String sql = "select id, nombre from testdb.dbo.tabledb"; 
+      Database daba = new Database("testdb", url);
+      try {
+    	  ResultSet resultSet =  daba.runSql(sql);
+    	  while (resultSet.next()) {
+              System.out.println("Printing result...");
+
+              // Now we can fetch the data by column name, save and use them!
+              String id = resultSet.getString("id");
+              String nombre = resultSet.getString("nombre");
+            
+
+              System.out.println("\tid: " + id + 
+                      ", nombre: " + nombre );
+          }
+
+      } catch (SQLException e) {
+          e.printStackTrace();
+      } /*finally {
+          // We have to close the connection and release the resources used.
+          // Closing the statement results in closing the resultSet as well.
+          try {
+              statement.close();
+          } catch (SQLException e) {
+              e.printStackTrace();
+          }
+
+          try {
+              connect.close();
+          } catch (SQLException e) {
+              e.printStackTrace();
+          }
+*/
     }
     
     
